@@ -128,8 +128,52 @@ var brain = (function (brain)
         this.canvasContext.strokeRect(x, y, width, height);
         this.canvasContext.restore();
     };
+    //Image drawing procedure that will be used throughout the game to do
+    //the main drawing.
+    Canvas2d_prototype.prototype.drawImage = function (sprite, cords, origin, rotation, scale, rect, mirror)
+    {
+        cords = typeof cords === 'undefined' ? new brain.Vector2(0, 0) : cords;
+        origin = typeof origin === 'undefined' ? new brain.Vector2(0, 0) : origin;
+        rotation = typeof rotation === 'undefined' ? 0 : rotation;
+        scale = typeof scale === 'undefined' ? 1 : scale;
+        rect = typeof rect === 'undefined' ? new brain.Vector2(0, 0) : rect;
 
-    //We add the Canvas2d object to the brain namespace. 
+        this.canvasContext.save();
+        var canvasScale = this.scale;
+
+        //mirror indicates whether we want to reflect the sprite on the y-axis
+        if (mirror)
+        {
+            //we scale the canvas x-cords by -1 because we want to reflect
+            //the sprite with respect to the y-axis. this should make sense if
+            //you try to imagine a Cartesian plane.
+            this.canvasContext.scale(scale * canvasScale.x * -1, scale * canvasScale.y);
+            this.canvasContext.translate(-cords.x - source.width, cords.y);
+            this.canvasContext.rotate(rotation);
+            //this should make sense, but if it doesn't, imagine the Cartesian plane
+            //and there's a rectangle in the first quadrant, and the origin is the
+            //the intersection of the diagonals of the rectangle. When we reflect the
+            //rectangle, we have to change the origin to show the reflection.
+            //for more see
+            //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+            this.canvasContext.drawImage(sprite, rect.x, rect.y, rect.width, rect.height,
+                                         rect.width-origin.x, -origin.y,
+                                         rect.width, rect.height);
+        }
+        else
+        {
+            this.canvasContext.scale(scale * canvasScale.x, scale * canvasScale.y);
+            this.canvasContext.translate(cords.x, cords.y);
+            this.canvasContext.rotate(rotation);
+            //for more see
+            //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+            this.canvasContext.drawImage(sprite, rect.x, rect.y, rect.width, rect.height,
+                                         -origin.x, -origin.y, rect.width, rect.height);
+        }
+        //restore the canvas context
+        this.canvasContext.restore();
+    };
+    //We add the Canvas2d object to the brain namespace.
     brain.Canvas2d = new Canvas2d_prototype();
     return brain;
 })(brain || {});

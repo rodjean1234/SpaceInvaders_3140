@@ -6,10 +6,24 @@
     namespace contains a lot of things currently. In particular, it contains
     a Canvas object, Game object, Vector class, and a Rectangle class.
     More classes and objects will be added to this namespace as time
-    progresses. 
+    progresses.
 */
 "using strict";
 
+var sprites = {};
+brain.Game.loadAssets = function()
+{
+    var loadImage = function (sprite)
+    {
+        var temp = new Image();
+        temp.src = "Images/" + sprite;
+        return temp;
+    };
+    sprites.player = loadImage("player.png");
+};
+
 brain.Game.start('gameArea', 'gameCanvas', 1440, 825);
+
+
 
 brain.Game.mainLoop();

@@ -92,16 +92,23 @@ var brain = (function (brain)
     //The main loop of our game.
     Game_prototype.prototype.mainLoop = function ()
     {
+        brain.Canvas2d.clearCanvas();
         var canvas = brain.Canvas2d.canvas;
         var ctx = brain.Canvas2d.canvasContext;
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         brain.Canvas2d.writeText("I love 0x4164646572616C6C", new brain.Vector2(brain.Game._dimensions.x/2, brain.Game._dimensions.y/2), new brain.Vector2(0, 0),
-                                 "#FFFFFF", "center", "Cambria Math", "100px");
+                                 "#FFFFFF", "center", "Cambria Math", "75px");
+        var scale = 0.05;
+        var random_cords = new brain.Vector2(Math.random()*brain.Game.dimension.x*(1/scale),
+                                             Math.random()*brain.Game.dimension.y*(1/scale))
+        brain.Canvas2d.drawImage(sprites.player, random_cords,
+                                 new brain.Vector2(sprites.player.width/2,sprites.player.height/2), 0, scale,
+                                 new brain.Rectangle(0, 0, sprites.player.width, sprites.player.height))
         requestAnimationFrame(brain.Game.mainLoop);
     };
 
-    //Here we add the Game object to the namespace. 
+    //Here we add the Game object to the namespace.
     brain.Game = new Game_prototype;
     return brain;
 })(brain || {});
