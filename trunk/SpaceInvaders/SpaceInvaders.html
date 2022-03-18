@@ -22,6 +22,7 @@
             viewport is the same width as the device and that the user is unable
             to scale the page.
         -->
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
         <!--
@@ -32,11 +33,17 @@
         <script src="../LAB.min.js"></script>
         <script>
             var braindir = '../brain/';
-
+            var objectdir = 'gameobjects/'
             $LAB
                     .script(braindir + 'Vector.js').wait()
                     .script(braindir + 'Rectangle.js').wait()
                     .script(braindir + 'Canvas.js').wait()
+                    .script(braindir + 'Sprites.js').wait()
+                    .script(braindir + 'Keyboard.js').wait()
+                    .script(objectdir + 'uiArea.js').wait()
+                    .script(objectdir + 'PlayerArea.js').wait()
+                    .script(objectdir + 'EnemyArea.js').wait()
+                    .script(objectdir + 'Player.js').wait()
                     .script(braindir + 'Game.js').wait()
                     .script('SpaceInvaders.js').wait(function() {
                         console.log("Starting game");

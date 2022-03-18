@@ -73,22 +73,41 @@ var brain = (function (brain)
     {
         this._dimensions = new brain.Vector2(width, height);
         brain.Canvas2d.initialize(divName, canvasName, width, height);
+
+
+
         this.loadAssets();
         this.assetLoadingLoop();
     };
 
+    Game_prototype.prototype.initialize = function ()
+    {
+
+    };
     //An asset loading function that will come in use later.
     Game_prototype.prototype.loadAssets = function ()
     {
-        ;
+
     };
 
     //An asset loading loop that will come in use later.
     Game_prototype.prototype.assetLoadingLoop = function ()
     {
-        ;
+        brain.Canvas2d.clearCanvas();
+        brain.Canvas2d.writeText("Loading Assets", new brain.Vector2(brain.Game._dimensions.x/2, brain.Game._dimensions.y/2), new brain.Vector2(0, 0),
+                                 "#FF0000", "center", "Cambria Math", "75px");
+        if (brain.Game._spritesStillLoading > 0)
+        {
+            requestAnimationFrame(brain.Game.assetLoadingLoop);
+        }
+        else
+        {
+            brain.Game.initialize();
+            requestAnimationFrame(brain.Game.mainLoop);
+        }
     };
-
+    brain.font_size = 40;
+    brain.adder = 0.5;
     //The main loop of our game.
     Game_prototype.prototype.mainLoop = function ()
     {
@@ -97,14 +116,21 @@ var brain = (function (brain)
         var ctx = brain.Canvas2d.canvasContext;
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        brain.Canvas2d.writeText("I love 0x4164646572616C6C", new brain.Vector2(brain.Game._dimensions.x/2, brain.Game._dimensions.y/2), new brain.Vector2(0, 0),
-                                 "#FFFFFF", "center", "Cambria Math", "75px");
-        var scale = 0.05;
-        var random_cords = new brain.Vector2(Math.random()*brain.Game.dimension.x*(1/scale),
-                                             Math.random()*brain.Game.dimension.y*(1/scale))
-        brain.Canvas2d.drawImage(sprites.player, random_cords,
-                                 new brain.Vector2(sprites.player.width/2,sprites.player.height/2), 0, scale,
-                                 new brain.Rectangle(0, 0, sprites.player.width, sprites.player.height))
+
+        if (brain.font_size >= 75)
+            brain.adder = -0.5;
+        else if (brain.adder === -0.5 && brain.font_size <= 35)
+            brain.adder = 0.5;
+
+        brain.font_size += brain.adder;
+
+        brain.Canvas2d.writeText("Work in Progress", new brain.Vector2(brain.Game._dimensions.x/2, brain.Game._dimensions.y/2), new brain.Vector2(0, 0),
+                                 "#FF0000", "center", "Cambria Math", brain.font_size.toString() + "px");
+        brain.Canvas2d.drawRectangle(gameObjs.uiArea.rectangle, "blue");
+        brain.Canvas2d.drawRectangle(gameObjs.EnemyArea.rectangle, "red");
+        brain.Canvas2d.drawRectangle(gameObjs.PlayerArea.rectangle, "green");
+
+        gameObjs.Player.drawPlayer();
         requestAnimationFrame(brain.Game.mainLoop);
     };
 
