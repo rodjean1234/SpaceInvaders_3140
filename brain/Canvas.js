@@ -120,12 +120,15 @@ var brain = (function (brain)
         this.canvasContext.restore();
     };
     //Simple procedure to draw a rectangle. Will come in handy later on.
-    Canvas2d_prototype.prototype.drawRectangle = function (x, y, width, height)
+    Canvas2d_prototype.prototype.drawRectangle = function (rect, strokeColor)
     {
+        rect = typeof rect === 'undefined' ? new brain.Rectangle(0, 0, 50, 50) : rect;
+        strokeColor = typeof strokeColor === 'undefined' ? "white" : strokeColor;
         var canvasScale = this.scale;
         this.canvasContext.save();
+        this.canvasContext.strokeStyle = strokeColor;
         this.canvasContext.scale(canvasScale.x, canvasScale.y);
-        this.canvasContext.strokeRect(x, y, width, height);
+        this.canvasContext.strokeRect(rect.x, rect.y, rect.width, rect.height);
         this.canvasContext.restore();
     };
     //Image drawing procedure that will be used throughout the game to do

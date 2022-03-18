@@ -13,17 +13,24 @@
 var sprites = {};
 brain.Game.loadAssets = function()
 {
-    var loadImage = function (sprite)
+    var loadImage = function (src)
     {
-        var temp = new Image();
-        temp.src = "Images/" + sprite;
-        return temp;
+        return new brain.Sprite(src);
     };
-    sprites.player = loadImage("player.png");
+    sprites.player = loadImage("Images/player.png");
 };
 
-brain.Game.start('gameArea', 'gameCanvas', 1440, 825);
-
-
-
-brain.Game.mainLoop();
+brain.Game.initialize = function()
+{
+    var width = brain.Game.dimension.x;
+    var height = brain.Game.dimension.y;
+    gameObjs.uiArea.initialize(new brain.Rectangle(0, 0, width, height/10));
+    gameObjs.EnemyArea.initialize(new brain.Rectangle(0, height/10 + 1, width, 2*height/3));
+    gameObjs.PlayerArea.initialize(new brain.Rectangle(0, gameObjs.uiArea.rectangle.height + gameObjs.EnemyArea.rectangle.height + 2,
+                                                        width, 13*width/30));
+    var player_width = gameObjs.PlayerArea.rectangle.width/10;
+    var player_height = gameObjs.PlayerArea.rectangle.height/10;
+    var pRect = new brain.Rectangle(gameObjs.PlayerArea.rectangle.width/2-player_width/2,
+                                    brain.Game.dimension.y-player_height, player_width, player_height);
+    gameObjs.Player.initialize(sprites.player.image, pRect);
+}
