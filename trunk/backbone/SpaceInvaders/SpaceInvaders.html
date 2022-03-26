@@ -1,0 +1,68 @@
+<!--
+    *********************************************
+    *   This HTML file is written for the       *
+    *   semester-long project for CISC 3140     *
+    *   at Brooklyn College. The game is        *
+    *   inspired by the retro game space        *
+    *   invaders. To add our own twist, we      *
+    *   have modified some aspects of the game  *
+    *   In particular, we have modified the     *
+    *   enemies, the player, and the space      *
+    *   bases.                                  *
+    *                                           *
+    *   Last Updated: 03/16/2022                *
+    *   Authors: Muhammad Abid,                 *
+    *********************************************
+ -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+            The following meta adds mobile support. In essence, it makes it so that
+            viewport is the same width as the device and that the user is unable
+            to scale the page.
+        -->
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+        <!--
+            Since loading multiple javascript files can take some time, and since
+            they have interdependence, we will use the LABjs script loading tool
+            to handle the loading of scripts. For more, see http://labjs.com/
+        -->
+        <script src="../LAB.min.js"></script>
+        <script>
+            var braindir = '../brain/';
+            var objectdir = 'gameobjects/'
+            $LAB
+                    .script(braindir + 'Vector.js').wait()
+                    .script(braindir + 'Rectangle.js').wait()
+                    .script(braindir + 'Canvas.js').wait()
+                    .script(braindir + 'Sprites.js').wait()
+                    .script(braindir + 'Keyboard.js').wait()
+                    .script(objectdir + 'uiArea.js').wait()
+                    .script(objectdir + 'PlayerArea.js').wait()
+                    .script(objectdir + 'EnemyArea.js').wait()
+                    .script(objectdir + 'Player.js').wait()
+                    .script(braindir + 'Game.js').wait()
+                    .script('SpaceInvaders.js').wait(function() {
+                        console.log("Starting game");
+                        brain.Game.start("gameArea", "gameCanvas", 1440, 825);
+                    });
+        </script>
+        <title>Space Invaders</title>
+    </head>
+
+    <body>
+        <!--
+            This is our divider for the game area---hence, the id "gameArea".
+        -->
+        <div id="gameArea">
+            <!--
+                Canvas is used to do the drawing. The text between the tags is
+                displayed if the user's browser does not support canvas tags.
+            -->
+            <canvas id="gameCanvas">Canvas tags not supported.</canvas>
+        </div>
+    </body>
+</html>
