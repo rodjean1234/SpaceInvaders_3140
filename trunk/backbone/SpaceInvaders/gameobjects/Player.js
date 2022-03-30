@@ -27,9 +27,5 @@ class Player {
 			x: 0,
 			y: 0,
 		}
-
-		this.playerImage = playerImage;
-		this.width = 100;
-		this.height = 100;
 	}
 }
