@@ -1,27 +1,28 @@
+const canvas = document.getElementById('gameCanvas')
+const c = canvas.getContext('2D')
+
+canvas.width = innerWidth
+canvas.height = innerHeight
+
 class Player {
 	constructor() {
 
 		const image = new Image();
 		image.src = '../Images/player.png //placeholder, file path and image will change
 		image.onload = () => {
+			const imageScale = 0.2
 			this.image = image;
-			this.width = image.width;
-			this.height = image.height;
+			this.width = image.width * imageScale;
+			this.height = image.height * imageScale;
 
 			// TODO: Update position using canvas dimensions
 			// Set player start point to bottom mid
 			this.position = {
-				x: 0, 
-				y: 0,
+				x: canvas.width / 2  -this.width / 2, 
+				y: canvas.height - this.height - 50,
 			}
 		}
-		
-		// TODO: Update position using canvas. 
-		// Set player start point to bottom mid 
-		this.position = {
-			x: 0,
-			y: 0,
-		}
+
 		//set player lives to 3
 		this.lives = 3;
 		//create variable to change player position on X axis
@@ -55,5 +56,11 @@ class Player {
 			}
 		}
 		//TODO: create hitbox to detect when player gets shot
+	}
+
+	draw() {
+		if(this.image) {
+			c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height,)
+		}
 	}
 }
