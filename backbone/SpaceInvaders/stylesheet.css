@@ -6,6 +6,7 @@ html, body
         when drawing.
     */
     margin : 0;
+    overflow: hidden;
 }
 
 #gameArea

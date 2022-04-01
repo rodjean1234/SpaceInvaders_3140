@@ -1,31 +1,47 @@
-const canvas = document.getElementById('gameCanvas')
-const c = canvas.getContext('2D')
-
+// TODO: Use Canvas.js
+const canvas = document.querySelector('canvas')
+const c = canvas.getContext('2d')
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-class Player {
+export default class Player {
 	constructor() {
 		const image = new Image();
-		image.src = '../Images/player.png //placeholder, file path and image will change
+		image.src = './Images/student.png'
 		image.onload = () => {
-			const imageScale = 0.2
-			this.image = image;
-			this.width = image.width * imageScale;
-			this.height = image.height * imageScale;
+			const imageScale = 0.5
+			this.image = image
+			this.width = image.width * imageScale
+			this.height = image.height * imageScale
 
-			// TODO: Update position using canvas dimensions
-			// Set player start point to bottom mid
 			this.position = {
-				x: canvas.width / 2  -this.width / 2, 
-				y: canvas.height - this.height - 50,
+				x: canvas.width / 2 - this.width / 2,
+				y: canvas.height - this.height - 150, // TODO: This can lead to bugs. Dont use static int. Update to canvas height
 			}
+		}
+
+		this.travel = {
+			x: 0,
+			y: 0
 		}
 	}
 
 	draw() {
-		if(this.image) {
-			c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height,)
+		c.drawImage(
+			this.image, 
+			this.position.x, 
+			this.position.y, 
+			this.width, 
+			this.height,
+		)
+	}
+
+	update() {
+		if (this.image) {
+			this.draw()
+			this.position.x += this.travel.x
 		}
 	}
 }
+
+
