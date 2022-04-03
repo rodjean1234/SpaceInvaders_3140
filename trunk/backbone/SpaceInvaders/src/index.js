@@ -1,5 +1,5 @@
-import Player from "./gameobjects/Player.js"
-import Missile from "./gameobjects/Missile.js"
+import Player from "../models/Player.js"
+import Missile from "../models/Missile.js"
 
 // canvas is used in multiples files. Follow DRY
 // TODO: create nodes or package files to import canvas
