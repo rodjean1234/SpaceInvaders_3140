@@ -7,7 +7,7 @@ canvas.height = innerHeight
 export default class Player {
 	constructor() {
 		const image = new Image();
-		image.src = './Images/student.png'
+		image.src = '../Images/student.png'
 		image.onload = () => {
 			const imageScale = 0.5
 			this.image = image
