@@ -1,16 +1,16 @@
+// Importing using ES6 Module
 import Player from "../models/Player.js"
 import Missile from "../models/Missile.js"
+import Grid from "../models/Grid.js"
 
-// canvas is used in multiples files. Follow DRY
-// TODO: create nodes or package files to import canvas
-const canvas = document.getElementById('canvas')
-const c = canvas.getContext('2d')
+import { canvas, cv } from '../models/Canvas.js';
 
 canvas.width = innerWidth
 canvas.height = innerHeight
 
 const player = new Player()
 const missiles = []
+const grids = [new Grid()]
 
 // Maybe do two player mode if we have time?
 // TODO: Move to utils folder
@@ -26,8 +26,9 @@ const keys = {
 // animate() takes care of all animation that goes on in SpaceInvaders game.
 function animate() {
 	requestAnimationFrame(animate)
-    c.fillStyle = 'black'
-	c.fillRect(0,0, canvas.width, canvas.height) // Temporary background
+    cv.fillStyle = 'black'
+	cv.fillRect(0,0, canvas.width, canvas.height) // Temporary background
+
 	player.update()
     
     var moveLeft = keys.a.pressed || keys.ArrowLeft.pressed
@@ -35,6 +36,12 @@ function animate() {
 
     shoot()
 
+    grids.forEach((grid) => {
+        grid.update()
+        grid.invaders.forEach((invader) => {
+            invader.update({travel: grid.travel})
+        })
+    })
     if (moveLeft && player.position.x >= 0) {
         player.travel.x = -5
     }else if (moveRight && player.position.x + player.width <= canvas.width) {
@@ -46,8 +53,13 @@ function animate() {
 
 // TODO: Move to Player.js
 function shoot() {
-    missiles.forEach((missile) => { // see line 59
-        missile.update()
+    missiles.forEach((missile, index) => {
+        // Garbade removal: Remove missile obj from array when it's off the screen
+        if (missile.position.y + missile.image.height <= 0){
+            missiles.splice(index, 1)
+        }else{
+            missile.update()
+        }
     })
 }
 
@@ -77,6 +89,7 @@ addEventListener('keydown', ({key}) => {
     }
 })
 
+//Stop player on keyup
 addEventListener('keyup', ({key}) => {
     switch (key) {
         case 'a': 

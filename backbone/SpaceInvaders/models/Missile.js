@@ -1,8 +1,4 @@
-const canvas = document.getElementById('canvas')
-const c = canvas.getContext('2d')
-
-canvas.width = innerWidth
-canvas.height = innerHeight
+import { cv } from './Canvas.js';
 
 // Implement Missles for our Player. 
 export default class Missile {
@@ -11,9 +7,10 @@ export default class Missile {
         this.speed = speed
 
         const image = new Image();
-		image.src = '../Images/pencil_missile.png'
+		image.src = '../Images/slap.png'
 		image.onload = () => {
-			const imageScale = 0.1
+			// const imageScale = 0.1
+            const imageScale = 0.2
 			this.image = image
 			this.width = image.width * imageScale
 			this.height = image.height * imageScale
@@ -26,7 +23,7 @@ export default class Missile {
         // CanvasRenderingContext2D.drawImage: 
         // Argument 1 could not be converted to any of: 
         // HTMLImageElement, SVGImageElement, HTMLCanvasElement, HTMLVideoElement, OffscreenCanvas, ImageBitmap.** 
-		c.drawImage(
+		cv.drawImage(
 			this.image, 
 			this.position.x, 
 			this.position.y, 

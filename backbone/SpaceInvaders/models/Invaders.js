@@ -1,23 +1,22 @@
-import { canvas, cv } from './Canvas.js';
+import { cv } from './Canvas.js';
 
-export default class Player {
-	constructor() {
+export default class Invaders {
+	constructor({ position }) {
+        // Invaders Image and image dimension
 		const image = new Image();
-		image.src = '../Images/will_smith.png'
+		image.src = '../Images/chris_rock.jpeg'
 		image.onload = () => {
-			// const imageScale = 0.5
 			const imageScale = 0.1
 			this.image = image
 			this.width = image.width * imageScale
 			this.height = image.height * imageScale
 
 			this.position = {
-				x: canvas.width / 2 - this.width / 2,
-				y: canvas.height - this.height - 150, // TODO: This can lead to bugs. Dont use static int. Update to canvas height
+				x: position.x,
+				y: position.y
 			}
 		}
 
-		// The speed of Player
 		this.travel = {
 			x: 0,
 			y: 0
@@ -34,10 +33,12 @@ export default class Player {
 		)
 	}
 
-	update() {
+	update( {travel}) {
 		if (this.image) {
 			this.draw()
-			this.position.x += this.travel.x
+			this.position.x += travel.x
+            this.position.y += travel.y
+
 		}
 	}
 }
