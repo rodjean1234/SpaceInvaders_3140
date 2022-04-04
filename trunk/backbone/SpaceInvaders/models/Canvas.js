@@ -1,7 +1,4 @@
-const canvas = document.getElementById('canvas')
-const c = canvas.getContext('2d')
+export const canvas = document.getElementById('canvas')
+export const cv = canvas.getContext('2d')
 
-canvas.width = innerWidth
-canvas.height = innerHeight
-
-export { canvas, c }
+// #TODO: Do we need innerHeight and innerWidth equal canvas height and width?
