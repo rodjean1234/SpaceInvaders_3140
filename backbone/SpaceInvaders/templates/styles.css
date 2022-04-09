@@ -1,0 +1,43 @@
+/* #TODO */
+/* Adjust screen and player base on windows dimension. */
+
+html, body
+{
+    /*
+        we do not want margins
+        because they are annoying
+        when drawing.
+    */
+    margin : 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+.screen {
+    position: fixed;
+    text-align: center;
+    left: 25%;
+    top: 25%;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;  
+    padding-bottom: 30px;  
+}
+
+.start-logo {
+    color: green;
+    font-family: 'VT323', monospace;
+    font-size: 100px;
+}
+
+.start-button {
+    border: none;
+    appearance: none;
+    outline: none;
+    display: inline-block;
+    font-size: 1.5em;
+    text-decoration: none;
+    padding: 12px 48px 12px 48px;
+    color: green;
+    font-family: 'VT323', monospace;
+}
