@@ -37,9 +37,16 @@ function animate() {
     shoot()
 
     grids.forEach((grid) => {
-        grid.update()
-        grid.invaders.forEach((invader) => {
-            invader.update({travel: grid.travel})
+        grid.update();
+        grid.invaders.forEach((invader, i) => {
+            invader.update({travel: grid.travel});
+            // Missile and invader collision
+            missiles.forEach((missile, j) => {
+                if(collides(invader, missile)) {
+                    grid.invaders.splice(i, 1)
+                    missiles.splice(j, 1)
+                }
+            })
         })
     })
     if (moveLeft && player.position.x >= 0) {
@@ -108,3 +115,11 @@ addEventListener('keyup', ({key}) => {
             break
     }
 })
+function collides(a, b)
+{
+    if (a.position.x < b.position.x + b.width &&
+        a.position.x + a.width > b.position.x &&
+        a.position.y < b.position.y + b.height &&
+        a.position.y + a.height > b.position.y) return true;
+
+}
