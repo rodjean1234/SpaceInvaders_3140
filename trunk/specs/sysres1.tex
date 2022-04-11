@@ -69,7 +69,7 @@
    
    \section{Introduction}
    
-   \noindent This SyRS is written for the CISC 3140 semester project at Brooklyn College. This document is a work-in-progress, so nothing is concrete. The game is supposed to be a working copy of the famous game \textit{Space Invaders}\footnote{\href{https://en.wikipedia.org/wiki/Space_Invaders}{https://en.wikipedia.org/wiki/Space\_Invaders}}. Here is what the game looks like for those that are not familiar:
+   \noindent This SyRS is written for the CISC 3140 semester project at Brooklyn College. This document is a work-in-progress, so nothing is concrete. The game is inspired by the famous game \textit{Space Invaders}\footnote{\href{https://en.wikipedia.org/wiki/Space_Invaders}{https://en.wikipedia.org/wiki/Space\_Invaders}}. Here is what the game looks like for those that are not familiar:
        
    \label{gamepic}
    \vspace{10px}
@@ -108,14 +108,14 @@
         \phantomsection
         \addcontentsline{toc}{subsubsection}{BSR.2.1}
         \subsubsection*{BSR.2.1}
-        \item Game must run on both the PC and Mobile versions of Google Chrome, Firefox, and Safari.
+        \item Game must run on PC versions of Google Chrome, Firefox, Safari, and Internet Explorer. 
     \end{enumerate}
     
     
     
     \section{Game Expectations}
     
-    As mentioned in the introduction, the game should be a replica of Space Invaders. We will now list some requirements the game must meet. 
+    As mentioned in the introduction, the game is based on Space Invaders. The game should play and behave just like the original Space Invaders. We will now list some requirements the game must meet. 
     
     \phantomsection
     \addcontentsline{toc}{subsection}{GR.1}
@@ -141,7 +141,7 @@
         \phantomsection
         \addcontentsline{toc}{subsubsection}{GR.1.4}
         \subsubsection*{GR.1.4}
-        \item Finally, below the flashing text we will have the default keys and their function. We will have a picture of the arrow keys along with an equal sign saying that the keys are used for movement, and a picture of the space bar with an equal sign followed by ``shoot'', telling the user that the space bar is used to shoot. Of course these controls are for PCs, so we will have to display something alternate for mobile users. For mobile users, we will show two animated images. The first animated image will show a hand holding a phone and the hand's thumb will be sliding horizontally across the bottom of the screen with an equal sign followed by ``movement''. Another animated image will show the thumb tapping the screen followed by an equal sign saying ``shoot''.
+        \item Finally, below the flashing text we will have the default keys and their function. We will have a picture of the arrow keys along with an equal sign saying that the keys are used for movement, and a picture of the space bar with an equal sign followed by ``shoot'', telling the user that the space bar is used to shoot.
     \end{enumerate}
     
     \phantomsection
@@ -153,12 +153,12 @@
         \phantomsection
         \addcontentsline{toc}{subsubsection}{GR.2.1}
         \subsubsection*{GR.2.1}
+        \label{numAliens}
         \item When the game begins, we will show a short cinematic. The cinematic will just be a dialogue box that says ``The evil Deans and Trustees of CUNY have come to attack the students. Help defend the students from the Dean and Trustee barrage!". The text will not be displayed all at once. It will be displayed one word at a time. The rate at which each word is displayed has not yet been decided. We will then show the 4 evil Deans and Trustees from \nameref{aliens}.
         \phantomsection
         \addcontentsline{toc}{subsubsection}{GR.2.2}
         \subsubsection*{GR.2.2}
-        \item Once the cinematic has finished, we will officially begin the game. We will now discuss the elements of the game. The game will be divided into three areas. See \nameref{fig:game_rect} on next page.
-        
+        \item Once the cinematic has finished, we will officially begin the game. We will now discuss the elements of the game. The game will be divided into three areas. See \nameref{fig:game_rect} on next page. We will now draw the game using abstract rectangles. Please note that these rectangles are an abstraction used to help think of the game. 
         
         \begin{figure}[!htb]
         \begin{center}
@@ -682,7 +682,11 @@
         \phantomsection
         \addcontentsline{toc}{subsubsection}{GR.3.4}
         \subsubsection*{GR.3.4}
-        \item The player projectile will be the same speed as the enemy's projectile speed, and will be constant throughout the game. After the player shoots, the player must wait $0.5$ seconds for the projectile to recharge. When the projectile has recharged, the player is free to shoot once again. Similar to the enemy's projectile, the 
+        \item The player projectile will be the same speed as the enemy's projectile speed, and will be constant throughout the game. After the player shoots, the player must wait $0.5$ seconds for the projectile to recharge. When the projectile has recharged, the player is free to shoot once again.
+        \phantomsection
+        \addcontentsline{toc}{subsubsection}{GR.3.5}
+        \subsubsection*{GR.3.4}
+        \item As mentioned in \nameref{numAliens} there are 4 aliens, but we have only mentioned 3 so far. The fourth alien is a bonus alien that randomly spawns throughout the game. The alien awards a large amount of points if it is killed. The alien appears directly below the user-interface rectangle. The alien spawns randomly either on the left or on the right, and continues to move horizontally across the screen. When the alien leaves the screen, it disappears and is no longer part of the game. 
     \end{enumerate}
     \phantomsection
     \addcontentsline{toc}{subsection}{GR.4}
