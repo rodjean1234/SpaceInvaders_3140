@@ -61,8 +61,11 @@ function animate() {
 // TODO: Move to Player.js
 function shoot() {
     missiles.forEach((missile, index) => {
-        // Garbade removal: Remove missile obj from array when it's off the screen
+        // Garbade removal (Performance): Remove missile obj from array when it's off the screen
         if (missile.position.y + missile.image.height <= 0){
+            setTimeout(() => {
+                missiles.splice(index,1)
+            }, 0)
             missiles.splice(index, 1)
         }else{
             missile.update()
@@ -72,7 +75,7 @@ function shoot() {
 
 animate()
 
-// Registers user key stroke. Validkeys as a, d, left arrow, right arrow
+// Registers user key stroke. Valid keys are 'a', 'd', 'left arrow', 'right arrow'
 addEventListener('keydown', ({key}) => {
     switch (key) {
         case 'a': 
@@ -88,7 +91,6 @@ addEventListener('keydown', ({key}) => {
             keys.ArrowRight.pressed = true
             break
         case ' ': 
-            // TODO: This pushes new missles obj to missiles array. This will clog up array and slow down performance. Fix
             missiles.push(new Missile({
                 position: {x: player.position.x + player.width / 2, y: player.position.y}, speed: {x: 0, y:-10}
             }))
@@ -115,6 +117,7 @@ addEventListener('keyup', ({key}) => {
             break
     }
 })
+
 function collides(a, b)
 {
     if (a.position.x < b.position.x + b.width &&

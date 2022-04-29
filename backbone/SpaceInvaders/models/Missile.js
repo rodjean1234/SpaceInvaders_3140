@@ -7,10 +7,9 @@ export default class Missile {
         this.speed = speed
 
         const image = new Image();
-		image.src = '../Images/slap.png'
+		image.src = '../Images/pencil_missile.png'
 		image.onload = () => {
-			// const imageScale = 0.1
-            const imageScale = 0.2
+            const imageScale = 0.1
 			this.image = image
 			this.width = image.width * imageScale
 			this.height = image.height * imageScale
