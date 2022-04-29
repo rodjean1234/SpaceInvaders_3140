@@ -3,10 +3,10 @@ import { canvas, cv } from './Canvas.js';
 export default class Player {
 	constructor() {
 		const image = new Image();
-		image.src = '../Images/will_smith.png'
+		image.src = '../Images/student.png'
 		image.onload = () => {
 			// const imageScale = 0.5
-			const imageScale = 0.1
+			const imageScale = 0.4
 			this.image = image
 			this.width = image.width * imageScale
 			this.height = image.height * imageScale

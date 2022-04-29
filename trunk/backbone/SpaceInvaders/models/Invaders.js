@@ -4,9 +4,9 @@ export default class Invaders {
 	constructor({ position }) {
         // Invaders Image and image dimension
 		const image = new Image();
-		image.src = '../Images/chris_rock.jpeg'
+		image.src = '../Images/Professor.png'
 		image.onload = () => {
-			const imageScale = 0.1
+			const imageScale = 0.25
 			this.image = image
 			this.width = image.width * imageScale
 			this.height = image.height * imageScale
