@@ -22,9 +22,13 @@ export default class Player {
 			x: 0,
 			y: 0
 		}
+		
+		this.opacity = 1
 	}
 
 	draw() {
+		cv.save()
+		cv.globalAlpha = this.opacity
 		cv.drawImage(
 			this.image, 
 			this.position.x, 
@@ -32,6 +36,8 @@ export default class Player {
 			this.width, 
 			this.height,
 		)
+
+		cv.restore()
 	}
 
 	update() {
