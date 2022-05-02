@@ -1,5 +1,6 @@
 /* #TODO */
 /* Adjust screen and player base on windows dimension. */
+/* THIS PAGE IS DEPRECIATED */
 
 html, body
 {
@@ -10,31 +11,34 @@ html, body
     */
     margin : 0;
     overflow: hidden;
+    background-color: black;
 }
 
-#gameArea
-{
-    /*
-        we do not want the gameArea
-        to change position
-    */
-    position : absolute;
+.screen {
+    position: fixed;
+    text-align: center;
+    left: 25%;
+    top: 10%;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;  
+    padding-bottom: 30px; 
 }
 
-#gameCanvas
-{
-    /*
-        we do not want the gameCanvas
-        to change position
-    */
-    position : absolute;
+.start-logo {
+    color: green;
+    font-family: 'VT323', monospace;
+    font-size: 100px;
+}
 
-    /*
-        we want the gameCanvas, since
-        it is the only object, to
-        occupy 100% of the gameArea
-        divider.
-    */
-    width  : 100%;
-    height : 100%;
+.start-button {
+    border: none;
+    appearance: none;
+    outline: none;
+    display: inline-block;
+    font-size: 1.5em;
+    text-decoration: none;
+    padding: 12px 48px 12px 48px;
+    color: green;
+    font-family: 'VT323', monospace;
 }
