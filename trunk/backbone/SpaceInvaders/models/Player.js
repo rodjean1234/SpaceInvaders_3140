@@ -13,7 +13,7 @@ export default class Player {
 
 			this.position = {
 				x: canvas.width / 2 - this.width / 2,
-				y: canvas.height - this.height - 150, // TODO: This can lead to bugs. Dont use static int. Update to canvas height
+				y: canvas.height - this.height - 30, // TODO: This can lead to bugs. Dont use static int. Update to canvas height
 			}
 		}
 

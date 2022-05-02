@@ -6,8 +6,7 @@ import Particle from "../models/Particle.js";
 
 import { canvas, cv } from '../models/Canvas.js';
 
-canvas.width = 1024
-canvas.height = 576
+
 
 const scoreElement = document.querySelector("#scoreElement")
 
@@ -29,10 +28,12 @@ const keys = {
 
 let frames = 0;
 let randInterval = Math.floor(Math.random() * 500 + 500);
+
 let game = {
     over: false,
-    active: true
+    active: true,
 }
+
 let score = 0
 
 function createParticles({object, color}) {
@@ -51,11 +52,13 @@ function createParticles({object, color}) {
         }))
     }
 }
+
 // TODO: Move to Player.js
 // animate() takes care of all animation that goes on in SpaceInvaders game.
-function animate() {
+function animate() {    
     // if the game is not active do not animate
     if(!game.active) return
+
 	requestAnimationFrame(animate)
     cv.fillStyle = 'black'
 	cv.fillRect(0,0, canvas.width, canvas.height) // Temporary background

@@ -1,21 +1,13 @@
 /* #TODO */
 /* Adjust screen and player base on windows dimension. */
 
-html, body
+body
 {
-    /*
-        we do not want margins
-        because they are annoying
-        when drawing.
-    */
-    margin : 0;
-    overflow: hidden;
-    background-image: url("../Images/background.png");
     display: flex;
     justify-content: center;
-    align-items: center; /*doe snto work need to fix*/
-
-    font-family: 'VT323', monospace;
+    /* align-items: center; */
+    background-color: black;
+    min-width: 1360;
 }
 
 .screen {

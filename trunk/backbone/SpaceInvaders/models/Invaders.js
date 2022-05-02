@@ -7,7 +7,7 @@ export default class Invaders {
 		const image = new Image();
 		image.src = '../Images/Professor.png'
 		image.onload = () => {
-			const imageScale = 0.25
+			const imageScale = 0.2
 			this.image = image
 			this.width = image.width * imageScale
 			this.height = image.height * imageScale
