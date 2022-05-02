@@ -33,7 +33,7 @@
     </head>
 
     <body>
-
+        
         <!-- Start Screen -->
         <div id="start-screen" class="screen" style="display:block">
             <h1 class="start-logo">BC Invaders</h1>
@@ -57,7 +57,10 @@
           Canvas is used to do the drawing. The text between the tags is
           displayed if the user's browser does not support canvas tags.
          -->
-        <canvas id="canvas" style='display:none'></canvas>
+        <p style="position: fixed; z-index: 1; color: white; left: 5px;">Score: <span id="scoreElement"><span>0</span></span></p>
+        <div>
+            <canvas id="canvas" style='display:none'></canvas>
+        </div>
 
         <script type="module" src="../src/index.js"></script>
         <script src="../models/Menu.js"></script>

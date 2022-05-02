@@ -11,6 +11,9 @@ html, body
     margin : 0;
     overflow: hidden;
     background-image: url("../Images/background.png");
+    display: flex;
+    justify-content: center;
+    align-items: center; /*doe snto work need to fix*/
 }
 
 .screen {

@@ -2,15 +2,20 @@
 import Player from "../models/Player.js"
 import Missile from "../models/Missile.js"
 import Grid from "../models/Grid.js"
+import Particle from "../models/Particle.js";
 
 import { canvas, cv } from '../models/Canvas.js';
 
-canvas.width = innerWidth
-canvas.height = innerHeight
+canvas.width = 1024
+canvas.height = 576
+
+const scoreElement = document.querySelector("#scoreElement")
 
 const player = new Player()
 const missiles = []
-const grids = [new Grid()]
+const grids = []
+const invaderMissiles = []
+const particles = []
 
 // Maybe do two player mode if we have time?
 // TODO: Move to utils folder
@@ -22,14 +27,84 @@ const keys = {
     space: {pressed: false}
 }
 
+let frames = 0;
+let randInterval = Math.floor(Math.random() * 500 + 500);
+let game = {
+    over: false,
+    active: true
+}
+let score = 0
+
+function createParticles({object, color}) {
+    for(let i = 0; i < 20; i++) {
+        particles.push(new Particle({
+            position: {
+                x: object.position.x + object.width / 2,
+                y: object.position.y + object.height / 2
+            }, 
+            speed: {
+                x: (Math.random() - 0.5) * 2,
+                y: (Math.random() - 0.5) * 2,
+            },
+            radius: Math.random() * 3,
+            color: color
+        }))
+    }
+}
 // TODO: Move to Player.js
 // animate() takes care of all animation that goes on in SpaceInvaders game.
 function animate() {
+    // if the game is not active do not animate
+    if(!game.active) return
 	requestAnimationFrame(animate)
     cv.fillStyle = 'black'
 	cv.fillRect(0,0, canvas.width, canvas.height) // Temporary background
 
 	player.update()
+
+    //rendering particles
+    particles.forEach((particle, index) => {
+        if (particle.opacity <= 0){
+            setTimeout(() => {
+                particles.splice(index, 1)
+            }, 0)
+        }else {
+            particle.update()
+  
+        }
+    })
+     
+    invaderMissiles.forEach((invaderMissile, index) => {
+        if (invaderMissile.position.y + invaderMissile.height >= canvas.height) {
+            setTimeout(() => {
+                invaderMissiles.splice(index,1)
+            }, 0)
+        }else {
+            invaderMissile.update()
+        }
+
+        //missile hit player
+        if (
+            invaderMissile.position.y + invaderMissile.height >= player.position.y &&
+            invaderMissile.position.x + invaderMissile.width >= player.position.x &&
+            invaderMissile.position.x <= player.position.x + player.width
+        ){
+            setTimeout(() => {
+                invaderMissiles.splice(index,1)
+                player.opacity = 0,
+                game.over = true
+            }, 0)
+
+            setTimeout(() => {
+                game.active = false
+            }, 2000) //2 seconds stop the game
+            
+            createParticles({
+                object: player,
+                color: 'white'
+            })
+        }
+    })
     
     var moveLeft = keys.a.pressed || keys.ArrowLeft.pressed
     var moveRight = keys.d.pressed || keys.ArrowRight.pressed
@@ -38,11 +113,22 @@ function animate() {
 
     grids.forEach((grid) => {
         grid.update();
+
+        if(frames % 100 === 0 && grid.invaders.length> 0){
+            grid.invaders[Math.floor(Math.random() * grid.invaders.length)].shoot(invaderMissiles)
+        }
+
         grid.invaders.forEach((invader, i) => {
             invader.update({travel: grid.travel});
             // Missile and invader collision
             missiles.forEach((missile, j) => {
                 if(collides(invader, missile)) {
+                    score +=100
+                    scoreElement.innerHTML = score
+                    createParticles({
+                        object: invader,
+                        color: 'red'
+                    })
                     grid.invaders.splice(i, 1)
                     missiles.splice(j, 1)
                 }
@@ -56,6 +142,15 @@ function animate() {
     }else {
         player.travel.x = 0
     }
+
+    if (frames % randInterval === 0) {
+        grids.push(new Grid())
+        randInterval = Math.floor(Math.random() * 500 + 500);
+        frames = 0
+    }
+
+    frames++
+
 }
 
 // TODO: Move to Player.js
@@ -77,6 +172,8 @@ animate()
 
 // Registers user key stroke. Valid keys are 'a', 'd', 'left arrow', 'right arrow'
 addEventListener('keydown', ({key}) => {
+    if (game.over) return
+
     switch (key) {
         case 'a': 
             keys.a.pressed = true

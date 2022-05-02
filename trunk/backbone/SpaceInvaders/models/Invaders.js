@@ -1,4 +1,5 @@
 import { cv } from './Canvas.js';
+import InvaderMissile from './InvaderMissile.js';
 
 export default class Invaders {
 	constructor({ position }) {
@@ -41,4 +42,17 @@ export default class Invaders {
 
 		}
 	}
+
+	shoot(invaderMissiles) {
+        invaderMissiles.push(new InvaderMissile({
+            position: {
+				x: this.position.x + this.width / 2,
+				y: this.position.y + this.height
+			},
+			speed: {
+				x: 0,
+				y: 5
+			}
+        }))
+    }
 }
