@@ -11,15 +11,15 @@ export default class Grid {
 
         // The speed of Invaders
         this.travel = {
-            x: 5,
+            x: 3,
             y: 0,
         }
 
         this.invaders = []
 
         // Set random # of invaders on each reload
-        const cols = Math.floor(Math.random() * 10 + 5)
-        const rows = Math.floor(Math.random() * 5 + 2)
+        const cols = Math.floor(Math.random() * 7 + 3)
+        const rows = Math.floor(Math.random() * 3 + 3)
 
         // The width of the grid is responsible to track when to `bounce`
         this.width = cols * 70

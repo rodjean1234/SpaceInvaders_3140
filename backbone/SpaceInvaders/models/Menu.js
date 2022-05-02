@@ -1,4 +1,3 @@
-
 // Does this belong in models?
 document.body.addEventListener('keypress', (key) => {
     if(key.key == 'Enter') start()
