@@ -1,0 +1,34 @@
+Name,Description,Status
+BSR.1,Performance,
+     BSR.1.1,60+ FPS goal,Feature Complete
+     BSR.1.2,Responsiveness goal,Feature Complete
+BSR.2,Compatibility,
+     BSR.2.1,Confirmed for Chrome/Firefox/Safari/IE browsers,In Progress
+GR.1,“Start” Screen,
+     GR.1.1,Title display,Complete
+     GR.1.2,Enemy display and point value,Complete
+     GR.1.3,Beginning display,Complete
+     GR.1.4,Control display,In Progress
+GR.2,Main Game,
+     GR.2.1,Introduction cinematic,Not Implemented
+     GR.2.2,N/A,N/A
+     GR.2.3,Game layout,Complete
+     GR.2.4,Enemy movement I,Feature Complete
+     GR.2.5,Enemy movement II,Feature Complete
+     GR.2.6,N/A,N/A
+GR.3,Enemy Behavior,
+     GR.3.1,General projectile behavior,In Progress
+     GR.3.2,Enemy projectile behavior,In Progress
+     GR.3.3,Player projectile behavior,Feature Complete
+GR.4,Levels,
+     GR.4.1,Level advancement reset,Not Implemented
+     GR.4.2,Lose conditions,Not Implemented
+GR.5,Game End,
+     GR.5.1,Hit while at 0 lives,Complete
+     GR.5.2,Enemy advances to player,In Progress
+GR.6,“Game Over” Screen,
+     GR.6.1,Score display,Complete
+     GR.6.2,Level display,Not Implemented
+     GR.6.3,Enemies defeated display,Not Implemented
+     GR.6.4,New game option,Not Implemented
+     GR.6.5,N/A,N/A
