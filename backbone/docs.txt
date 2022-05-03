@@ -25,8 +25,13 @@ Week of 4/5:
     • Specs adjusted, additional enemy details added
     • QA coordination, repository connection issues addressed
     • Files reorganized
+
+Week of 4/12:
     • Remove Mobile compatibility (out of scope) with unanimous agreement by other team
 
+Week of 4/19:
+    • Files reorganized
+    • Enemy graphics updated, added
 
 Week of 4/25:
     • Updated Start screen
@@ -49,5 +54,15 @@ Week of 4/25:
          • Different Invaders with different point values  
          • Contact specs, can a user win? If so, graphics, do we have a winning screen?
  
+
+Week of 4/26:
+    • Requirements tweaked
+    • Files reorganized
+    • Player graphics added
+    • Start screen added
+    • Game over screen added
+    • Duplicate files removed
+    • Animations added
+
 Week of 5/2
     • TBD
