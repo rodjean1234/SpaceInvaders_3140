@@ -1,0 +1,53 @@
+Week of 3/1:
+    • Repository created
+    • Preliminary organization discussions
+
+Week of 3/8:
+    • Users added to repository
+    • Roles assigned and created
+    • Synchronization of communication across platforms
+    • Graphics coordination, concepts and animations solidified
+
+Week of 3/15:
+    • QA coordination, repository connection issues addressed
+
+Week of 3/29:
+    • Player added
+    • Movement added
+    • Shooting added
+    • Readme added
+    • Placeholder images added
+    • QA coordination, repository connection issues addressed
+    • Files reorganized
+
+Week of 4/5:
+    • Enemy movement added
+    • Specs adjusted, additional enemy details added
+    • QA coordination, repository connection issues addressed
+    • Files reorganized
+    • Remove Mobile compatibility (out of scope) with unanimous agreement by other team
+
+
+Week of 4/25:
+    • Updated Start screen
+    • Received new graphics from Graphics team. Updated Game design with new graphics
+    • Add particle explosion on hit
+    • End game with player is hit
+    • Fix canvas
+    • Enemy shooting
+    • Update Game name to Deanvaders (subject to change)
+
+    • What's left:
+         • Register hit when an invader touches player (not just invaders missile)
+         • Update background and graphics
+         • Add stars
+         • Add game over screen
+         • Give three lives to player
+         • Add player barriers
+         • Add audio
+         • Fix padding 
+         • Different Invaders with different point values  
+         • Contact specs, can a user win? If so, graphics, do we have a winning screen?
+ 
+Week of 5/2
+    • TBD

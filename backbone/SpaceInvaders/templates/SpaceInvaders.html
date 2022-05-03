@@ -50,7 +50,7 @@
             <div>
                 <icon><img src="" alt="missing img"></icon><h3> = 10 points</h3>
             </div>
-            <button class="start-button" onclick="start();">Press Enter to Start</button>
+            <button id="start" class="start-button" onclick="start();">Press Enter to Start</button>
         </div>
 
          <!--
@@ -59,8 +59,8 @@
         <div style="position: relative;">
             <p style="position: absolute; z-index: 1; color: white; left: 5px;">Score: <span id="scoreElement"><span>0</span></span></p>
             <canvas id="canvas" style='display:none'></canvas>
-
         </div>
+
         <script src="../models/Menu.js"></script>
         <script type="module" src="../src/index.js"></script>
     </body>

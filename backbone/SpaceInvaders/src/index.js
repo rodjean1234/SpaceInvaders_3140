@@ -26,13 +26,16 @@ const keys = {
     space: {pressed: false}
 }
 
+// frames necessary too calculate when invaders should spawn and shoot
 let frames = 0;
 let randInterval = Math.floor(Math.random() * 500 + 500);
 
+// Game status
 let game = {
     over: false,
     active: true,
 }
+
 
 let score = 0
 
@@ -60,12 +63,13 @@ function animate() {
     if(!game.active) return
 
 	requestAnimationFrame(animate)
+
     cv.fillStyle = 'black'
 	cv.fillRect(0,0, canvas.width, canvas.height) // Temporary background
 
 	player.update()
 
-    //rendering particles
+    //rendering particles animation and fade
     particles.forEach((particle, index) => {
         if (particle.opacity <= 0){
             setTimeout(() => {
@@ -76,8 +80,9 @@ function animate() {
   
         }
     })
-     
+    
     invaderMissiles.forEach((invaderMissile, index) => {
+        // Garbage removal to imporve performance. Removes item when missle is off the screen
         if (invaderMissile.position.y + invaderMissile.height >= canvas.height) {
             setTimeout(() => {
                 invaderMissiles.splice(index,1)
@@ -88,6 +93,7 @@ function animate() {
 
         //missile hit player
         if (
+            // TODO: line-too-long, break out to vars for better clarity.
             invaderMissile.position.y + invaderMissile.height >= player.position.y &&
             invaderMissile.position.x + invaderMissile.width >= player.position.x &&
             invaderMissile.position.x <= player.position.x + player.width
@@ -98,9 +104,11 @@ function animate() {
                 game.over = true
             }, 0)
 
+            // NOTE: We do NOT want to stop the game right after user is hit. 
+            // For better UX stop game after 2 seconds after user is hit
             setTimeout(() => {
                 game.active = false
-            }, 2000) //2 seconds stop the game
+            }, 2000)
             
             createParticles({
                 object: player,
@@ -113,16 +121,19 @@ function animate() {
     var moveRight = keys.d.pressed || keys.ArrowRight.pressed
 
     shoot()
-
+    
     grids.forEach((grid) => {
         grid.update();
 
+        // Random invaders on grid shoots after every 100 frames.
         if(frames % 100 === 0 && grid.invaders.length> 0){
             grid.invaders[Math.floor(Math.random() * grid.invaders.length)].shoot(invaderMissiles)
         }
 
+        // Invader movement
         grid.invaders.forEach((invader, i) => {
             invader.update({travel: grid.travel});
+
             // Missile and invader collision
             missiles.forEach((missile, j) => {
                 if(collides(invader, missile)) {
@@ -138,6 +149,8 @@ function animate() {
             })
         })
     })
+
+    // Player move animation and speed of movement
     if (moveLeft && player.position.x >= 0) {
         player.travel.x = -5
     }else if (moveRight && player.position.x + player.width <= canvas.width) {
@@ -146,6 +159,7 @@ function animate() {
         player.travel.x = 0
     }
 
+    // Spawn a new grid of invader after a random interval of frames
     if (frames % randInterval === 0) {
         grids.push(new Grid())
         randInterval = Math.floor(Math.random() * 500 + 500);
@@ -171,7 +185,13 @@ function shoot() {
     })
 }
 
-animate()
+// start game when start button is clicked
+document.getElementById('start').addEventListener('click', () => {
+    setTimeout(() => {
+        animate()
+    }, 0)
+});
+
 
 // Registers user key stroke. Valid keys are 'a', 'd', 'left arrow', 'right arrow'
 addEventListener('keydown', ({key}) => {
@@ -218,6 +238,7 @@ addEventListener('keyup', ({key}) => {
     }
 })
 
+//TODO: This does not belong here. Move to Player.js
 function collides(a, b)
 {
     if (a.position.x < b.position.x + b.width &&
