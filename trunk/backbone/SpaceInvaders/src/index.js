@@ -6,8 +6,6 @@ import Particle from "../models/Particle.js";
 
 import { canvas, cv } from '../models/Canvas.js';
 
-
-
 const scoreElement = document.querySelector("#scoreElement")
 
 const player = new Player()
@@ -26,6 +24,20 @@ const keys = {
     space: {pressed: false}
 }
 
+for(let i = 0; i < 100; i++) {
+    particles.push(new Particle({
+        position: {
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height
+        }, 
+        speed: {
+            x: 0,
+            y: 0.4,
+        },
+        radius: Math.random() * 2,
+        color: 'white'
+    }))
+}
 // frames necessary too calculate when invaders should spawn and shoot
 let frames = 0;
 let randInterval = Math.floor(Math.random() * 500 + 500);
@@ -36,10 +48,9 @@ let game = {
     active: true,
 }
 
-
 let score = 0
 
-function createParticles({object, color}) {
+function createParticles({object, color, fades}) {
     for(let i = 0; i < 20; i++) {
         particles.push(new Particle({
             position: {
@@ -51,10 +62,12 @@ function createParticles({object, color}) {
                 y: (Math.random() - 0.5) * 2,
             },
             radius: Math.random() * 3,
-            color: color
+            color: color,
+            fades
         }))
     }
 }
+let playerScream = () => new Audio("../Images/ouch.mp3").play()
 
 // TODO: Move to Player.js
 // animate() takes care of all animation that goes on in SpaceInvaders game.
@@ -64,10 +77,21 @@ function animate() {
 
 	requestAnimationFrame(animate)
 
-    cv.fillStyle = 'black'
-	cv.fillRect(0,0, canvas.width, canvas.height) // Temporary background
+    const base_image = new Image();
+    base_image.src = '../Images/Background_space_less_stars.png';
+    base_image.onload = () => {
+        cv.drawImage(base_image, 0, 0, canvas.width, canvas.height)
+    }
 
 	player.update()
+
+    particles.forEach((particle, i)=> {
+        if (particle.position.y - particle.radius >= canvas.height) {
+            particle.position.x = Math.random() * canvas.width
+            particle.position.y = -particle.radius
+
+        }
+    })
 
     //rendering particles animation and fade
     particles.forEach((particle, index) => {
@@ -98,6 +122,7 @@ function animate() {
             invaderMissile.position.x + invaderMissile.width >= player.position.x &&
             invaderMissile.position.x <= player.position.x + player.width
         ){
+            playerScream();
             setTimeout(() => {
                 invaderMissiles.splice(index,1)
                 player.opacity = 0,
@@ -112,8 +137,16 @@ function animate() {
             
             createParticles({
                 object: player,
-                color: 'white'
+                color: 'white',
+                fades: true,
             })
+
+            let over_screen = document.getElementById('gameover-screen')
+            over_screen.style.display = 'block'
+            let canvas = document.getElementById('canvas')
+            canvas.style.display = 'none'
+            game.over = true
+
         }
     })
     
@@ -141,7 +174,8 @@ function animate() {
                     scoreElement.innerHTML = score
                     createParticles({
                         object: invader,
-                        color: 'red'
+                        color: 'red',
+                        fades: true
                     })
                     grid.invaders.splice(i, 1)
                     missiles.splice(j, 1)
@@ -192,6 +226,7 @@ document.getElementById('start').addEventListener('click', () => {
     }, 0)
 });
 
+let shootSound = () => new Audio("../Images/shoot_sound.mp3").play()
 
 // Registers user key stroke. Valid keys are 'a', 'd', 'left arrow', 'right arrow'
 addEventListener('keydown', ({key}) => {
@@ -214,6 +249,7 @@ addEventListener('keydown', ({key}) => {
             missiles.push(new Missile({
                 position: {x: player.position.x + player.width / 2, y: player.position.y}, speed: {x: 0, y:-10}
             }))
+            shootSound()
             break
     }
 })

@@ -1,7 +1,7 @@
 import { cv } from './Canvas.js';
 
 export default class Particle {
-    constructor({position, speed, radius, color}) { // Rename: alternative name, velocity, speed, travel
+    constructor({position, speed, radius, color, fades}) { // Rename: alternative name, velocity, speed, travel
         this.position = position
         this.speed = speed
 
@@ -9,6 +9,7 @@ export default class Particle {
         this.color = color
         
         this.opacity = 1
+        this.fades = fades
     }
 
     draw() {
@@ -27,6 +28,6 @@ export default class Particle {
         this.position.x += this.speed.x
         this.position.y += this.speed.y
 
-        this.opacity -= 0.01
+        if (this.fades) this.opacity -= 0.01
     }
 }

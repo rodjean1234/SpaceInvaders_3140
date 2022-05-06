@@ -50,8 +50,10 @@
             <div>
                 <icon><img src="" alt="missing img"></icon><h3> = 10 points</h3>
             </div>
-            <button id="start" class="start-button" onclick="start();">Press Enter to Start</button>
+            <button id="start" class="start-button" onclick="start(); playMusic();">Press Enter to Start</button>
+
         </div>
+
 
          <!--
           Canvas is used to do the drawing.
@@ -61,7 +63,15 @@
             <canvas id="canvas" style='display:none'></canvas>
         </div>
 
+         <!-- Game Over screen -->
+         <div id="gameover-screen" class="over-screen" style="display: none">
+            <h1>Game Over</h1>
+        </div>
+
         <script src="../models/Menu.js"></script>
         <script type="module" src="../src/index.js"></script>
+        <script>
+            let playMusic = () => new Audio("../Images/game_music.mp3").play()
+        </script>
     </body>
 </html>

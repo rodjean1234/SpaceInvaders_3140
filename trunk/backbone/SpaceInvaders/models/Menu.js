@@ -8,6 +8,12 @@ function start() {
     this.showScreen('canvas', true)
 }
 
+function stop() {
+    this.showScreen('start-screen', false)
+    this.showScreen('canvas', false)
+    this.showScreen('over-screen', true)
+}
+
 function showScreen(id, isShow) {
     let screen = document.getElementById(id)
     let display = ( isShow ) ? 'block' : 'none'
