@@ -117,35 +117,13 @@ function animate() {
 
         //missile hit player
         if (
-            // TODO: line-too-long, break out to vars for better clarity.
+            // TODO: line-too-long, break out to vars for better clarity. Could use collides(invaderMissile, player) and it works but causes alot of weird errors
             invaderMissile.position.y + invaderMissile.height >= player.position.y &&
             invaderMissile.position.x + invaderMissile.width >= player.position.x &&
             invaderMissile.position.x <= player.position.x + player.width
         ){
-            playerScream();
-            setTimeout(() => {
-                invaderMissiles.splice(index,1)
-                player.opacity = 0,
-                game.over = true
-            }, 0)
-
-            // NOTE: We do NOT want to stop the game right after user is hit. 
-            // For better UX stop game after 2 seconds after user is hit
-            setTimeout(() => {
-                game.active = false
-            }, 2000)
-            
-            createParticles({
-                object: player,
-                color: 'white',
-                fades: true,
-            })
-
-            let over_screen = document.getElementById('gameover-screen')
-            over_screen.style.display = 'block'
-            let canvas = document.getElementById('canvas')
-            canvas.style.display = 'none'
-            game.over = true
+            // Moved gameOver to a function since it will be called in other places too
+            gameOver();
 
         }
     })
@@ -166,6 +144,11 @@ function animate() {
         // Invader movement
         grid.invaders.forEach((invader, i) => {
             invader.update({travel: grid.travel});
+
+            // If invader runs into player, game over
+            if(collides(invader, player)) {
+                gameOver();
+            }
 
             // Missile and invader collision
             missiles.forEach((missile, j) => {
@@ -282,4 +265,30 @@ function collides(a, b)
         a.position.y < b.position.y + b.height &&
         a.position.y + a.height > b.position.y) return true;
 
+}
+function gameOver() {
+    playerScream();
+            setTimeout(() => {
+                invaderMissiles.splice(index,1)
+                player.opacity = 0,
+                game.over = true
+            }, 0)
+
+            // NOTE: We do NOT want to stop the game right after user is hit. 
+            // For better UX stop game after 2 seconds after user is hit
+            setTimeout(() => {
+                game.active = false
+            }, 2000)
+            
+            createParticles({
+                object: player,
+                color: 'white',
+                fades: true,
+            })
+
+            let over_screen = document.getElementById('gameover-screen')
+            over_screen.style.display = 'block'
+            let canvas = document.getElementById('canvas')
+            canvas.style.display = 'none'
+            game.over = true
 }
