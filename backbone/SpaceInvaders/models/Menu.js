@@ -1,4 +1,5 @@
 // Does this belong in models?
+//TODO: Pressing the enter key takes away the menu but doesn't properly start the game, only pressing it with your cursor makes it run properly
 document.body.addEventListener('keypress', (key) => {
     if(key.key == 'Enter') start()
 })
