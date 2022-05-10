@@ -1,7 +1,7 @@
 import { cv } from './Canvas.js';
 
-// Implement Missles for our Player. 
-export default class Missile {
+// Implement Invaders Missles for our Invaders. Includes missile position, speed, size , and design 
+export default class InvaderMissile {
     constructor({position, speed}) { // Rename: alternative name, velocity, speed, travel
         this.position = position
         this.speed = speed

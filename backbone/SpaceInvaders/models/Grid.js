@@ -2,6 +2,7 @@ import Invaders from "./Invaders.js"
 
 import { canvas } from './Canvas.js';
 
+// Set the number of invaders in each row and column.
 export default class Grid {
     constructor() {
         this.position = {

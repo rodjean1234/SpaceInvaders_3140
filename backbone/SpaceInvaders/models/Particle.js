@@ -1,5 +1,6 @@
 import { cv } from './Canvas.js';
 
+// Particles necessary for blood spash and stars. Include particle size, color, and style
 export default class Particle {
     constructor({position, speed, radius, color, fades}) { // Rename: alternative name, velocity, speed, travel
         this.position = position

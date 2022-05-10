@@ -8,7 +8,10 @@ import { canvas, cv } from '../models/Canvas.js';
 
 const scoreElement = document.querySelector("#scoreElement")
 
+// Player
 const player = new Player()
+
+// Lists
 const missiles = []
 const grids = []
 const invaderMissiles = []
@@ -24,6 +27,7 @@ const keys = {
     space: {pressed: false}
 }
 
+// Moving stars giviing the moving effect.
 for(let i = 0; i < 100; i++) {
     particles.push(new Particle({
         position: {
@@ -38,6 +42,7 @@ for(let i = 0; i < 100; i++) {
         color: 'white'
     }))
 }
+
 // frames necessary too calculate when invaders should spawn and shoot
 let frames = 0;
 let randInterval = Math.floor(Math.random() * 500 + 500);
@@ -48,8 +53,10 @@ let game = {
     active: true,
 }
 
+// Score count
 let score = 0
 
+// Creating the spash particle for ememy hit
 function createParticles({object, color, fades}) {
     for(let i = 0; i < 20; i++) {
         particles.push(new Particle({
@@ -128,6 +135,7 @@ function animate() {
         }
     })
     
+    // Set valid keyboard input
     var moveLeft = keys.a.pressed || keys.ArrowLeft.pressed
     var moveRight = keys.d.pressed || keys.ArrowRight.pressed
 

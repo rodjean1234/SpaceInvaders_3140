@@ -1,5 +1,6 @@
 import { canvas, cv } from './Canvas.js';
 
+// Player, include player image, style, size, speed.
 export default class Player {
 	constructor() {
 		const image = new Image();

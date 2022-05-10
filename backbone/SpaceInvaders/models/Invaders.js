@@ -1,6 +1,7 @@
 import { cv } from './Canvas.js';
 import InvaderMissile from './InvaderMissile.js';
 
+// Invader, includes invader image, size, speed, push, and shoot.
 export default class Invaders {
 	constructor({ position }) {
         // Invaders Image and image dimension

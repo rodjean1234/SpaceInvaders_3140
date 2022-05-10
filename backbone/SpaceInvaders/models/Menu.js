@@ -4,17 +4,20 @@ document.body.addEventListener('keypress', (key) => {
     if(key.key == 'Enter') start()
 })
 
+// Show canvas and hide start screen
 function start() {
     this.showScreen('start-screen', false)
     this.showScreen('canvas', true)
 }
 
+// Show game over screen on game over
 function stop() {
     this.showScreen('start-screen', false)
     this.showScreen('canvas', false)
     this.showScreen('over-screen', true)
 }
 
+// Toggle elements
 function showScreen(id, isShow) {
     let screen = document.getElementById(id)
     let display = ( isShow ) ? 'block' : 'none'
